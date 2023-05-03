@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User, Car
+from database.models import User, Car, Task, Reward, Category
 
 ma = Marshmallow()
 
@@ -57,5 +57,54 @@ class CarSchema(ma.Schema):
 car_schema = CarSchema()
 cars_schema = CarSchema(many=True)
 
-
 # TODO: Add your schemas below
+class TaskSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    name = fields.String(required=True)
+    description = fields.String(required=True)
+    entry_time = fields.DateTime()
+    start_time = fields.DateTime()
+    completion_time = fields.DateTime()
+    deadline = fields.DateTime()
+    status = fields.String()
+    user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
+
+    class Meta:
+        fields = ("id", "name", "description", "entry_time", "start_time", "completion_time", "deadline", "user_id", "user")
+
+    @post_load
+    def create_task(self, data, **kwargs):
+        return Task(**data)
+
+task_schema = TaskSchema()
+tasks_schema = TaskSchema(many=True)
+
+class RewardSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    name = fields.String(required=True)
+    user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
+    class Meta:
+        fields = ("id", "name", "user_id", "user")
+
+    @post_load
+    def create_reward(self, data, **kwargs):
+        return Reward(**data)
+
+reward_schema = RewardSchema()
+rewards_schema = RewardSchema(many=True)
+
+class CategorySchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    name = fields.String(required=True)
+
+    class Meta:
+        fields = ("id", "name")
+
+    @post_load
+    def create_category(self, data, **kwargs):
+        return Category(**data)
+    
+category_schema = CategorySchema()
+categories_schema = CategorySchema(many=True)

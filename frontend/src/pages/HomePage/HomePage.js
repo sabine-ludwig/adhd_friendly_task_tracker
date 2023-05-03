@@ -1,39 +1,37 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-
 import axios from "axios";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
-  //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [cars, setCars] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const fetchCars = async () => {
+    const fetchTasks = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:5000/api/user_cars", {
+        let response = await axios.get("http://127.0.0.1:5000/api/user_tasks", {
           headers: {
             Authorization: "Bearer " + token,
           },
         });
-        setCars(response.data);
+        setTasks(response.data);
       } catch (error) {
         console.log(error.response.data);
       }
     };
-    fetchCars();
+    fetchTasks();
   }, [token]);
   return (
     <div className="container">
       {console.log(user)}
       <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
+      {tasks &&
+        tasks.map((task) => (
+          <p key={task.id}>
+            {task.name} {task.description} {task.status}
           </p>
         ))}
     </div>
