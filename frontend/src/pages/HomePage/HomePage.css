@@ -1,0 +1,39 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center; 
+    color: rgb(120, 120, 169)
+}
+
+.box-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    width: 70%;
+    margin-top: 2rem; 
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    background: rgb(180, 180, 219); 
+    color: white; 
+    text-decoration: none;
+    font-size: 24px;
+    border-radius: 10px;
+    
+    &:hover {
+        transform: scale(1.05);
+        background: rgb(120, 120, 169); 
+    }
+}

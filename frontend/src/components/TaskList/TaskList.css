@@ -1,0 +1,78 @@
+.task-table {
+    width: 60%;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+
+  .task-table th, tr {
+    border: 1px solid lavender;
+  }
+  
+  .task-table th,
+  .task-table td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .task-table th {
+    background-color: rgb(204, 204, 236);
+    color: white;
+  }
+  
+  .task-table td {
+    color: rgb(179, 179, 223);
+  }
+
+  .task-list-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(204, 204, 236);
+    color: white;
+    padding: .25rem;
+    border-style: solid;
+    width: 30%;
+    margin: auto;
+  }
+
+  .task-buttons {
+    float: right;
+    display: flex;
+    gap: 5px;
+  }
+
+  .add-task-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .add-task-button {
+    background-color: rgb(204, 204, 236);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-task-button:hover {
+    background-color: rgb(179, 179, 223);
+  }
+
+  .no-tasks {
+    text-align: center;
+    color: rgb(179, 179, 223);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+  
+
+  

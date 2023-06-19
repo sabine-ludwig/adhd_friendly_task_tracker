@@ -2,14 +2,16 @@ ul {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
+  align-items: center;
 }
 
 li {
-  font-size: 1.25rem;
+  font-size: 1rem;
+  margin-right: 10px;
 }
 
 .navBar {
-  background: steelblue;
+  background: rgb(180, 180, 219);
   box-shadow: 4px 2px 5px gray;
   color: white;
   margin-bottom: 2rem;
@@ -25,11 +27,12 @@ li {
 
 .navBar button:hover {
   background: white;
-  color: steelblue;
+  color: rgb(120, 120, 169);
   cursor: pointer;
 }
 
 .brand {
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.75rem;
+  margin-right: auto;  
 }

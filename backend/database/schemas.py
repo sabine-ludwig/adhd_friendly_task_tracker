@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User, Car, Task, Reward, Category
+from database.models import User, Car, Task, Reward, UserActivity
 
 ma = Marshmallow()
 
@@ -61,6 +61,7 @@ cars_schema = CarSchema(many=True)
 class TaskSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
     name = fields.String(required=True)
+    task_type = fields.String(required=True)
     description = fields.String(required=True)
     entry_time = fields.DateTime()
     start_time = fields.DateTime()
@@ -71,7 +72,7 @@ class TaskSchema(ma.Schema):
     user = ma.Nested(UserSchema, many=False)
 
     class Meta:
-        fields = ("id", "name", "description", "entry_time", "start_time", "completion_time", "deadline", "user_id", "user")
+        fields = ("id", "name", "task_type", "description", "entry_time", "start_time", "completion_time", "deadline", "status", "user_id", "user")
 
     @post_load
     def create_task(self, data, **kwargs):
@@ -79,6 +80,25 @@ class TaskSchema(ma.Schema):
 
 task_schema = TaskSchema()
 tasks_schema = TaskSchema(many=True)
+
+class UserActivitySchema(ma.SQLAlchemyAutoSchema):
+    id = fields.Integer(primary_key=True)
+    activity_type = fields.String(required=True)
+    task_type = fields.String(required=True)  
+    timestamp = fields.DateTime()
+    user_id = fields.Integer()
+    user = ma.Nested(UserSchema, many=False)
+
+    class Meta:
+        fields = ("id", "activity_type", "task_type", "timestamp", "user_id", "user")
+
+    @post_load
+    def create_user_activity(self, data, **kwargs):
+        return UserActivity(**data)
+
+user_activity_schema = UserActivitySchema()
+user_activities_schema = UserActivitySchema(many=True)
+
 
 class RewardSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
@@ -95,16 +115,4 @@ class RewardSchema(ma.Schema):
 reward_schema = RewardSchema()
 rewards_schema = RewardSchema(many=True)
 
-class CategorySchema(ma.Schema):
-    id = fields.Integer(primary_key=True)
-    name = fields.String(required=True)
 
-    class Meta:
-        fields = ("id", "name")
-
-    @post_load
-    def create_category(self, data, **kwargs):
-        return Category(**data)
-    
-category_schema = CategorySchema()
-categories_schema = CategorySchema(many=True)

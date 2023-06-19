@@ -1,0 +1,36 @@
+.task-form-card {
+    background-color: lavender;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 5rem;
+  }
+  
+  .task-form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .task-form-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+  
+  .task-form-submit {
+    background-color: rgb(204, 204, 236);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .task-form-submit:hover {
+    background-color: rgb(160, 160, 192)
+  }

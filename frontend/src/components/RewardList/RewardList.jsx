@@ -1,19 +1,23 @@
 import React from "react";
+import "./RewardList.css";
 
-const RewardList = ({}) => {
-    // console.log()
+const RewardList = ({ rewards }) => {
     return (
-        <div>
-            <h4>Reward List</h4>
-            {tbd.rewards[0] && tbd.rewards.map((item => 
-            <p>
-            {item.text} 
-            </p>
-            ))}
-            
-            
-        </div>
-    )
-}
+      <div className="reward-list">
+        <h4 className="reward-list-title">Reward List</h4>
+        <ul>
+          {rewards.length > 0 ? (
+            rewards.map((reward, index) => (
+              <li key={reward.id}>
+                {index + 1}. {reward.name} 
+              </li>
+            ))
+          ) : (
+            <p>No rewards added</p>
+          )}
+        </ul>
+      </div>
+    );
+  };
 
-export default RewardList;
+  export default RewardList;

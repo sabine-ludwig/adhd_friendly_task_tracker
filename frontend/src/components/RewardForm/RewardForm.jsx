@@ -2,11 +2,12 @@ import React from "react";
 import useCustomForm from "../../hooks/useCustomForm";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import "./RewardForm.css"; 
 
 const RewardForm = ({}) => {
     const [user, token] = useAuth();
     const defaultValues = {
-        "Reward": ""
+        name: ""
     }
     
     const [formData, handleInputChange, handleSubmit] = useCustomForm(defaultValues,postNewReward);
@@ -25,18 +26,19 @@ const RewardForm = ({}) => {
     }
 
     return (
-        <div>
+        <div className="reward-form-card">
             <form onSubmit={handleSubmit}>
-                <label>
-                    Reward:{""}
+                <label className="reward-form-label">
+                    Reward:
                     <input
+                    className="reward-form-input"
                     type="text"
-                    name="Reward"
-                    value={formData.text}
+                    name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
                     />
                 </label>
-                <button>Add Reward</button>
+                <button className="reward-form-submit" type="submit">Add Reward</button>
             </form>
 
         </div>

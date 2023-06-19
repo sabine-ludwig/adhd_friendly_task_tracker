@@ -8,8 +8,9 @@ from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
-from resources.tasks import UserTaskResource
+from resources.tasks import UserTaskResource, UserTaskSpecificResource
 from resources.rewards import UserRewardResource
+from resources.trends import UserTaskTrendsResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -28,6 +29,7 @@ def create_app():
     """
     # Creates app instance
     app = Flask(__name__)
+    CORS(app)
 
     # Loads config properties from .env file
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
@@ -57,9 +59,10 @@ def create_routes():
     api.add_resource(LoginResource, '/api/auth/login')
     api.add_resource(AllCarResource, '/api/cars')
     api.add_resource(UserCarResource, '/api/user_cars')
-    # TODO: Create files for your Resources in resources folder, add them here
+    
     api.add_resource(UserTaskResource, '/api/user_tasks')
+    api.add_resource(UserTaskSpecificResource, '/api/user_tasks/<int:task_id>')
     api.add_resource(UserRewardResource, '/api/user_rewards')
-    # api.add_resource(UserTaskResource, '/api/user_tasks/<int:task_id>')
+    api.add_resource(UserTaskTrendsResource, '/user/task-trends')
     
     return api

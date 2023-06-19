@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import React from 'react'
 import RewardList from '../../components/RewardList/RewardList';
+import RewardForm from '../../components/RewardForm/RewardForm';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
 
@@ -34,6 +35,7 @@ const RewardPage = () => {
             rewards={rewards}
             setRewards={setRewards} 
             />
+            <RewardForm />
         </div>
      );
 }

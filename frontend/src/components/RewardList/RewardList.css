@@ -1,0 +1,28 @@
+.reward-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .reward-list li {
+    margin: 8px;
+    padding: 8px;
+    color: rgb(179, 179, 223);
+  }
+  
+  .reward-list-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(204, 204, 236);
+    color: white;
+    padding: 0.25rem;
+    border-style: solid;
+    width: 30%;
+    margin: auto;
+  }
+  
+  
+
+  
