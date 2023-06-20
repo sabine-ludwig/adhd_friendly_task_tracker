@@ -7,9 +7,8 @@ from flask_migrate import Migrate
 from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
-from resources.cars import AllCarResource, UserCarResource
 from resources.tasks import UserTaskResource, UserTaskSpecificResource
-from resources.rewards import UserRewardResource
+from resources.rewards import UserRewardResource, UserRewardSpecificResource
 from resources.trends import UserTaskTrendsResource
 from dotenv import load_dotenv
 from os import environ
@@ -57,12 +56,11 @@ def create_routes():
     api = Api()
     api.add_resource(RegisterResource, '/api/auth/register')
     api.add_resource(LoginResource, '/api/auth/login')
-    api.add_resource(AllCarResource, '/api/cars')
-    api.add_resource(UserCarResource, '/api/user_cars')
     
     api.add_resource(UserTaskResource, '/api/user_tasks')
     api.add_resource(UserTaskSpecificResource, '/api/user_tasks/<int:task_id>')
     api.add_resource(UserRewardResource, '/api/user_rewards')
+    api.add_resource(UserRewardSpecificResource, '/api/user_rewards/<int:reward_id>')
     api.add_resource(UserTaskTrendsResource, '/user/task-trends')
     
     return api

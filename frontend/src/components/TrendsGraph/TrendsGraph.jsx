@@ -17,7 +17,6 @@ const TrendChart = ({ token }) => {
 
         const data = response.data;
 
-        // Suppose the data is an array of objects with 'month' and 'activity' properties
         const labels = data.map(item => item.month);
         const dataset = data.map(item => item.activity);
 
@@ -43,7 +42,7 @@ const TrendChart = ({ token }) => {
   }, [token]);  
 
   return (
-    <div className="chart-container">  {/* Modify as per your CSS */}
+    <div className="chart-container"> 
       <h2>User activity trend</h2>
       {chartData && <Line data={chartData} options={{ responsive: true }} />}
     </div>

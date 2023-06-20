@@ -4,13 +4,13 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import "./RewardForm.css"; 
 
-const RewardForm = ({}) => {
+const RewardForm = ({ onRewardAdded }) => {
     const [user, token] = useAuth();
     const defaultValues = {
         name: ""
     }
     
-    const [formData, handleInputChange, handleSubmit] = useCustomForm(defaultValues,postNewReward);
+    const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(defaultValues,postNewReward);
 
     async function postNewReward(){
         try {
@@ -18,7 +18,9 @@ const RewardForm = ({}) => {
                 headers: {
                     Authorization: "Bearer " + token,
                 },
-            })
+            });
+            onRewardAdded();
+            reset();
             console.log(response.data)
         } catch (error) {
             console.log(error)
@@ -38,7 +40,9 @@ const RewardForm = ({}) => {
                     onChange={handleInputChange}
                     />
                 </label>
+                <div className="button-wrapper">
                 <button className="reward-form-submit" type="submit">Add Reward</button>
+                </div>
             </form>
 
         </div>

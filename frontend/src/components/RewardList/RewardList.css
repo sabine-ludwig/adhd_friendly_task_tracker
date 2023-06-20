@@ -1,28 +1,50 @@
-.reward-list {
+ .reward-list {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 1rem;
   }
   
+  .rewward-list ul {
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+  }
+
   .reward-list li {
-    margin: 8px;
-    padding: 8px;
     color: rgb(179, 179, 223);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+    padding: .5rem;
   }
   
   .reward-list-title {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
     background-color: rgb(204, 204, 236);
     color: white;
     padding: 0.25rem;
     border-style: solid;
     width: 30%;
     margin: auto;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  } 
+  
+  .add-reward-button {
+    background-color: rgb(204, 204, 236);
+    color: white;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    padding: .17rem;
+    margin-left: .5rem;
   }
   
-  
-
-  
+  .add-reward-button:hover {
+    background-color: rgb(179, 179, 223);
+  }

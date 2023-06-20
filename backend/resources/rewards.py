@@ -20,3 +20,16 @@ class UserRewardResource(Resource):
         db.session.add(new_reward)
         db.session.commit()
         return reward_schema.dump(new_reward), 201
+
+class UserRewardSpecificResource(Resource):
+    @jwt_required()
+    def delete(self, reward_id):
+        user_id = get_jwt_identity()
+        reward_to_delete = Reward.query.filter_by(id=reward_id, user_id=user_id).first()
+        if reward_to_delete is None:
+            return {"message": "No reward found with given id for the current user."}, 404
+
+        db.session.delete(reward_to_delete)
+        db.session.commit()
+
+        return {"message": "Reward successfully deleted."}, 200

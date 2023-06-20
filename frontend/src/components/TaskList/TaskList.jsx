@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./TaskList.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const TaskList = ({
   tasks,
@@ -14,18 +16,12 @@ const TaskList = ({
   const [updatedData, setUpdatedData] = useState({});
 
   const handleStartTask = async (taskId) => {
-    console.log("Start button clicked");
-
-    let date = new Date();
-    let mysqlFormatDate = date.toISOString().slice(0, 19).replace("T", " ");
+    console.log("Start task:", taskId);
 
     try {
-      let response = await axios.put(
+      await axios.patch(
         `http://127.0.0.1:5000/api/user_tasks/${taskId}`,
-        {
-          status: "Started",
-          start_time: mysqlFormatDate,
-        },
+        { action: "start" },
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -43,8 +39,6 @@ const TaskList = ({
           return task;
         });
       });
-
-      console.log(response.data);
 
       fetchTasks();
     } catch (error) {
@@ -107,7 +101,9 @@ const TaskList = ({
                 <th>Status</th>
                 <th>#</th>
                 <th>Name</th>
+                <th>Type</th>
                 <th>Description</th>
+                <th>Deadline</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -144,7 +140,9 @@ const TaskList = ({
                   ) : (
                     <>
                       <td>{task.name}</td>
+                      <td>{task.task_type}</td>
                       <td>{task.description}</td>
+                      <td>{task.deadline ? new Date(task.deadline).toLocaleString() : 'No deadline'}</td>
                     </>
                   )}
                   <td className="task-buttons">
@@ -155,7 +153,7 @@ const TaskList = ({
                     >
                       Start
                     </button>
-                  ) : task.status === "Started" ? (
+                  ) : task.status === "In Progress" ? (
                     <button
                       className="add-task-button"
                       onClick={() => handleFinishTask(task.id)}
@@ -175,14 +173,14 @@ const TaskList = ({
                       className="add-task-button"
                       onClick={() => handleEditClick(task)}
                     >
-                      Edit
+                      <FontAwesomeIcon icon={faPencilAlt} />
                     </button>
                   )}
                   <button
                     className="add-task-button"
                     onClick={() => handleDelete(task.id)}
                   >
-                    Delete
+                    <FontAwesomeIcon icon={faTrashAlt} />
                   </button>
                 </td>
                 </tr>
